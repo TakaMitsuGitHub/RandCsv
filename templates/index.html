@@ -12,7 +12,10 @@
 <body>
 
 <h1 class="hello_world">Hello World!</h1>
-<button id="create_csv" class="create_csv">create_csv</button>
+<form action="#">
+  {% csrf_token %}
+  <button id="create_csv" class="create_csv">create_csv</button>
+</form>
 <button id="read_csv" class="read_csv">read_csv</button>
 
 </body>
@@ -40,4 +43,30 @@
     box-shadow: 0.05em 0.05em;
   }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#create_csv').click(function() {
+            $.ajax({
+                url: '/api/create_csv/',
+                method: 'POST',
+                data: {
+                    // 必要に応じてデータを送信
+                },
+                headers: {
+                    'X-CSRFToken': csrfToken
+                },
+                success: function(response) {
+                    console.log("成功:", response);
+                    alert("aaa");
+                    // 必要に応じて成功時の処理を実行
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log("エラー:", xhr);
+                    // エラー処理
+                }
+            });
+        });
+    });
+</script>
 </html>
