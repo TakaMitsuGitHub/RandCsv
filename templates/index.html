@@ -1,0 +1,43 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+</head>
+<body>
+
+<h1 class="hello_world">Hello World!</h1>
+<button id="create_csv" class="create_csv">create_csv</button>
+<button id="read_csv" class="read_csv">read_csv</button>
+
+</body>
+
+<style>
+  button {
+    background: #fbca1f;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    cursor: pointer;
+  }
+
+  button:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+  }
+
+  button:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+  }
+</style>
+</html>
