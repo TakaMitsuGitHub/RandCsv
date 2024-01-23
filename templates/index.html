@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token }}">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -43,27 +44,25 @@
     box-shadow: 0.05em 0.05em;
   }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     $(document).ready(function() {
         $('#create_csv').click(function() {
             $.ajax({
                 url: '/api/create_csv/',
                 method: 'POST',
-                data: {
-                    // 必要に応じてデータを送信
-                },
+
                 headers: {
                     'X-CSRFToken': csrfToken
                 },
                 success: function(response) {
-                    console.log("成功:", response);
-                    alert("aaa");
-                    // 必要に応じて成功時の処理を実行
+                    console.log("www");
+                    alert(response.message)
+                    console.log("成功:", response.message);
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.log("エラー:", xhr);
-                    // エラー処理
                 }
             });
         });

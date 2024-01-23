@@ -25,6 +25,5 @@ urlpatterns = [
     path('', views.Index.as_view(), name='index'),
 
     # api
-    # path('api/create_csv/', views.CreateCsv.as_view(), name="create_csv"),
-    path('api/create_csv/', views.create_csv, name="create_csv"),
+    path('api/create_csv/', views.CreateCsv.as_view(), name="create_csv"),
 ]
