@@ -1,0 +1,15 @@
+@startuml
+start
+:CreateCSVボタンクリック;
+:CreateCSV;
+:DfToDb;
+end
+start
+:ReadCSVボタンクリック;
+:ReadCSV;
+:DfToDb;
+end
+
+
+
+@enduml

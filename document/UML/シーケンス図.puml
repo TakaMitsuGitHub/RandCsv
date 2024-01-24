@@ -1,0 +1,27 @@
+@startuml
+
+activate Index画面
+Index画面 -> CreateCSV: CreateCSVボタンクリック
+activate CreateCSV
+CreateCSV -> CreateDf
+activate CreateDf
+
+Index画面 -> ReadCSV: ReadCSVボタンクリック
+activate ReadCSV
+ReadCSV -> ReadDf
+activate ReadDf
+ReadDf -> DB
+activate DB
+deactivate DB
+
+CreateDf -> DB
+activate DB
+deactivate DB
+deactivate CreateDf
+deactivate CreateCSV
+
+
+
+' deactivate Index画面
+
+@enduml
