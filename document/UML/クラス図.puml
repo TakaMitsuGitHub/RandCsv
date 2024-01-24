@@ -1,22 +1,30 @@
 @startuml
 
+class CreateDf {
+
+    - generate_random_string()
+    - generate_random_date()
+    + create_df()
+}
 class Index画面
 
+
 class CreateCSV {
-    post()
+    + post()
 }
 class ReadCSV {
-    post()
+    + post()
 }
 class DfToDb {
-    col1
-    col2
-    col3
-    col4
+    str: col1
+    str: col2
+    str: col3
+    str: col4
 
-    insertOrUpdate()
+    + insertOrUpdate()
 }
 
+CreateDf <-- CreateCSV
 Index画面 <|.. CreateCSV
 Index画面 <|.. ReadCSV
 

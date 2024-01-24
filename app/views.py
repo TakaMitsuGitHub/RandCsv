@@ -13,12 +13,11 @@ class Index(TemplateView):
     template_name = 'index.html'
 
 
-# class Store(CreateView):
-
 # API
 class CreateCsv(APIView):
     def post(self, request):
-        df = rand_df.create_df()
+        create_df = rand_df.CreateDf()
+        df = create_df.create_df()
         df.to_csv("items.csv", index=False)
         data = {
             "message": "create成功しました",
@@ -26,6 +25,7 @@ class CreateCsv(APIView):
         # インスタンス化
         df_to_db = DfToDb(df)
         df_to_db.insertOrUpdate()
+        print("df_to_db.insertOrUpdate()")
 
         return Response(data)
 
