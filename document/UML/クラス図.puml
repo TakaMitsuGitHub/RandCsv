@@ -1,0 +1,26 @@
+@startuml
+
+class Index画面
+
+class CreateCSV {
+    post()
+}
+class ReadCSV {
+    post()
+}
+class DfToDb {
+    col1
+    col2
+    col3
+    col4
+
+    insertOrUpdate()
+}
+
+Index画面 <|.. CreateCSV
+Index画面 <|.. ReadCSV
+
+CreateCSV --> DfToDb
+ReadCSV --> DfToDb
+
+@enduml

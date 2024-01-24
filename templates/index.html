@@ -17,7 +17,10 @@
   {% csrf_token %}
   <button id="create_csv" class="create_csv">create_csv</button>
 </form>
-<button id="read_csv" class="read_csv">read_csv</button>
+<form action="#">
+  {% csrf_token %}
+  <button id="read_csv" class="read_csv">read_csv</button>
+</form>
 
 </body>
 
@@ -48,7 +51,7 @@
 <script>
     let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     $(document).ready(function() {
-        $('#create_csv').click(function() {
+        $('#create_csv').click(function(e) {
             $.ajax({
                 url: '/api/create_csv/',
                 method: 'POST',
@@ -57,15 +60,34 @@
                     'X-CSRFToken': csrfToken
                 },
                 success: function(response) {
-                    console.log("www");
                     alert(response.message)
-                    console.log("成功:", response.message);
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.log("エラー:", xhr);
                 }
             });
+            e.preventDefault();
         });
+    });
+
+    $(document).ready(function() {
+      $('#read_csv').click(function(e) {
+          $.ajax({
+              url: '/api/read_csv/',
+              method: 'POST',
+
+              headers: {
+                  'X-CSRFToken': csrfToken
+              },
+              success: function(response) {
+                  alert(response.message)
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                  console.log("エラー:", xhr);
+              }
+          });
+          e.preventDefault();
+      });
     });
 </script>
 </html>
