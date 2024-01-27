@@ -18,17 +18,23 @@ class CreateDf:
         start_date = datetime(2022, 1, 1)
         end_date = datetime(2022, 12, 31)
         random_date = start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
-        return random_date.strftime('%Y-%m-%d')  # 日付フォーマットを指定
+        formatted_date = random_date.strftime('%Y-%m-%d') # 日付フォーマットを指定
+
+        # Convert the string back to a datetime object
+        date_object = datetime.strptime(formatted_date, '%Y-%m-%d')
+
+        return date_object
 
 
     def create_df(self):
         # ランダムな文字列と数値を含むDataFrameを作成
         rand_len = 10
         data = {
-            'name': [f"book_{self.generate_random_string(4)}" for _ in range(rand_len)],
-            'other': [f"other_{self.generate_random_string(5)}" for _ in range(rand_len)],
+            'book_id': [f"id_{self.__generate_random_string(10)}" for _ in range(rand_len)],
+            'name': [f"book_{self.__generate_random_string(4)}" for _ in range(rand_len)],
+            'other': [f"other_{self.__generate_random_string(5)}" for _ in range(rand_len)],
             'rank': [random.randint(1, 100) for _ in range(rand_len)],
-            'release_date': [str(self.generate_random_date()) for _ in range(rand_len)],
+            'release_date': [self.__generate_random_date() for _ in range(rand_len)],
         }
 
         df = pd.DataFrame(data)
@@ -36,8 +42,11 @@ class CreateDf:
         # 欠損値をランダムに挿入する確率を設定（ここでは10%の確率で欠損値を挿入）
         probability = 0.10
 
-        # データフレームに欠損値をランダムに挿入
-        for column in df.columns:
-            df[column] = df[column].apply(lambda x: None if random.random() < probability else x)
+        col_name_list = list(df.columns)
+        col_name_list.remove('book_id')
 
+        # データフレームに欠損値をランダムに挿入
+        for column in col_name_list:
+            df[column] = df[column].apply(lambda x: None if random.random() < probability else x)
+        print(df)
         return df
