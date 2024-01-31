@@ -12,6 +12,7 @@ from django.db import models
 
 from .process import rand_df
 from . import models
+from .process import calculation
 
 
 class Index(TemplateView):
@@ -117,3 +118,16 @@ class DfToDb:
                     'rank': row[self.__mapping["col3"]],
                 }
             )
+
+
+class Calculation(APIView):
+    def post(self, request):
+        calclass = calculation.Calclass(55, 0.3)
+        calclass.csv_read()
+        data = {
+            "message": "calculation成功しました",
+        }
+        return Response(data)
+
+
+

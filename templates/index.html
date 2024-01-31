@@ -21,7 +21,10 @@
   {% csrf_token %}
   <button id="read_csv" class="read_csv">read_csv</button>
 </form>
-
+<form action="#">
+  {% csrf_token %}
+  <button id="calculation" class="calculation">calculation</button>
+</form>
 </body>
 
 <style>
@@ -74,6 +77,26 @@
       $('#read_csv').click(function(e) {
           $.ajax({
               url: '/api/read_csv/',
+              method: 'POST',
+
+              headers: {
+                  'X-CSRFToken': csrfToken
+              },
+              success: function(response) {
+                  alert(response.message)
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                  console.log("エラー:", xhr);
+              }
+          });
+          e.preventDefault();
+      });
+    });
+
+    $(document).ready(function() {
+      $('#calculation').click(function(e) {
+          $.ajax({
+              url: '/api/calculation/',
               method: 'POST',
 
               headers: {
